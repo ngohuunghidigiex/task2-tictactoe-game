@@ -7,6 +7,7 @@
 }
 
 body {
+    /* font-family: 'Noto Sans Symbols 2', sans-serif; */
     background-color: #996e89;
 }
 
@@ -18,13 +19,18 @@ body {
     height: 100vh;
 
     #title {
+        font-family: 'Dancing Script', cursive;
         font-size: 3rem;
         margin-bottom: 5rem;
         text-transform: uppercase;
         text-align: center;
-        font-weight: 800;
+        font-weight: 900;
         letter-spacing: 4px;
-        color: chartreuse;
+        background: linear-gradient(to bottom right, #ff6b6b 20%, #ffd93d, #6bffa2, #4d88ff, #a64dff, #ff6bd6 80%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-size: 200% 200%;
+        animation: gradient-animation 5s linear infinite;
     }
 
     #status {
@@ -35,9 +41,40 @@ body {
         font-weight: 800;
         letter-spacing: 4px;
 
-        animation-name: finish;
-        animation-duration: 2s;
-        animation-iteration-count: infinite;
+        background: linear-gradient(to bottom right, #ff6b6b 20%, #ffd93d, #6bffa2, #4d88ff, #a64dff, #ff6bd6 80%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-size: 200% 200%;
+        animation: gradient-animation 5s linear infinite;
+    }
+
+    #choose-player {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: 'Dancing Script', cursive;
+
+        .player {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin: 0 10px;
+
+            button {
+                padding: 14px 20px;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                margin: 0 10px;
+
+                &:hover {
+                    background-color: #27e456;
+                }
+            }
+        }
     }
 
     #grid {
@@ -76,17 +113,16 @@ body {
     }
 }
 
-@keyframes finish {
+@keyframes gradient-animation {
     0% {
-        color: rgb(55, 235, 55);
+        background-position: 0% 0%;
     }
-    33% {
-        color: rgb(255, 42, 42);
+
+    50% {
+        background-position: 100% 100%;
     }
-    66% {
-        color: rgb(243, 255, 70);
-    }
+
     100% {
-        color: rgb(55, 235, 55);
+        background-position: -0% -0%;
     }
 }

@@ -1,32 +1,43 @@
-let currentPlayer = 'X';
+var currentPlayer = 'X';
+var team = '';
 let board = ['', '', '', '', '', '', '', '', ''];
 let resetBtn = document.getElementById('btn-reset');
 let title = document.getElementById('title');
 let statusGame = document.getElementById('status');
+let player = document.getElementById('choose-player');
+let grid = document.getElementById('grid');
 
+grid.style.display = 'none';
 resetBtn.style.display = 'none';
 statusGame.style.display = 'none';
 
 let isOver = false;
 
+function choosePlayer(param) {
+    currentPlayer = param;
+    team = param;
+    grid.style.display = 'grid';
+    player.style.display = 'none';
+}
+
 function move(index) {
     if (board[index] === '' && !isOver) {
         board[index] = currentPlayer;
-        document.getElementById('grid').children[index].textContent = currentPlayer;
+        grid.children[index].textContent = currentPlayer;
         const winPattern = checkWin();
         if (winPattern) {
             resetBtn.style.display = 'block';
             title.style.display = 'none';
             isOver = true;
             statusGame.style.display = 'block';
-            if (currentPlayer === 'X') {
+            if (currentPlayer === team) {
                 statusGame.innerHTML = 'Người chơi thắng! <i class="fa-regular fa-face-grin-wink"></i>';
             } else {
                 statusGame.innerHTML =
                     'Bot nó đánh random mà bạn cũng thua! </br> Nhìn lại bản thân đi <i class="fa-regular fa-face-tired"></i>';
             }
             winPattern.forEach((index) => {
-                document.getElementById('grid').children[index].style.backgroundColor = 'yellow';
+                grid.children[index].style.backgroundColor = 'yellow';
             });
         } else if (board.every((cell) => cell !== '')) {
             resetBtn.style.display = 'block';
@@ -36,7 +47,7 @@ function move(index) {
             statusGame.textContent = 'Hòa!';
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            if (currentPlayer === 'O') {
+            if (currentPlayer !== team) {
                 botMove();
             }
         }
@@ -79,11 +90,14 @@ function reset() {
     resetBtn.style.display = 'none';
     statusGame.style.display = 'none';
     title.style.display = 'block';
+    player.style.display = 'block';
+    grid.style.display = 'none';
     isOver = false;
     board = ['', '', '', '', '', '', '', '', ''];
     currentPlayer = 'X';
-    Array.from(document.getElementById('grid').children).forEach((cell) => {
+    team = '';
+    Array.from(grid.children).forEach((cell) => {
         cell.textContent = '';
-        cell.style.backgroundColor = ''; // Reset lại màu nền
+        cell.style.backgroundColor = '';
     });
 }

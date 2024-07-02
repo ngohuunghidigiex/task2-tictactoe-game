@@ -11,6 +11,13 @@
             <h1 id="title">Tic Tac Toe</h1>
             <p id="status"></p>
             <div class="row">
+                <div id="choose-player">
+                    <h2>Vui lòng chọn đội</h2>
+                    <div class="player">
+                        <button onclick="choosePlayer('X')">X</button>
+                        <button onclick="choosePlayer('O')">O</button>
+                    </div>
+                </div>
                 <ul id="grid">
                     <li class="cell" onclick="move(0)"></li>
                     <li class="cell" onclick="move(1)"></li>
